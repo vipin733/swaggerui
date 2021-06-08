@@ -1,0 +1,219 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Tirios APIs",
+      "version": "1.0.0",
+      "title": "Swagger update UI",
+      "termsOfService": "http://{{URL}}",
+      "contact": {
+        "email": "support@trilios.ai"
+      },
+      "license": {
+        "name": "Apache2.0",
+        "url": "http://trilios.ai"
+      }
+    },
+    "host": "virtserver.swaggerhub.com",
+    "basePath": "/vipin733/test/1.0.0",
+    "tags": [
+      {
+        "name": "JOB",
+        "description": "Everthing about job",
+        "externalDocs": {
+          "description": "More",
+          "url": "http://{{someURl}}"
+        }
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
+    ],
+    "paths": {
+      "/job": {
+        "get": {
+          "tags": [
+            "JOB"
+          ],
+          "summary": "Get all jobs associated with provider member",
+          "description": "",
+          "operationId": "GetJObs",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Job"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/job/{jobId}": {
+        "get": {
+          "tags": [
+            "JOB"
+          ],
+          "summary": "Get job by job id",
+          "description": "For valid job response try with integer id",
+          "operationId": "getJobById",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "jobId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful fetched",
+              "schema": {
+                "$ref": "#/definitions/JobsResponse"
+              }
+            },
+            "400": {
+              "description": "Invalid id"
+            },
+            "404": {
+              "description": "Job not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": {
+            "type": "string"
+          },
+          "landlord": {
+            "$ref": "#/definitions/User"
+          },
+          "tenant": {
+            "$ref": "#/definitions/User"
+          },
+          "providerMember": {
+            "$ref": "#/definitions/User"
+          },
+          "property": {
+            "$ref": "#/definitions/Property"
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "scheduledRate": {
+            "type": "integer"
+          },
+          "checkInTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "checkoutTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "xml": {
+          "name": "Job"
+        }
+      },
+      "Property": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Property"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "JobResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "xml": {
+          "name": "JobResponse"
+        }
+      },
+      "JobsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "xml": {
+          "name": "JobsResponse"
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
